@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3cfeaff2b3ba4debbe782615d73114d8" Name="Diagram1">
+        <EntityTypeShape EntityType="TravelKTSModel.accommodation" Width="1.5" PointX="3" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelKTSModel.entertainment" Width="1.5" PointX="8.25" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelKTSModel.entertainmentBooking" Width="1.5" PointX="13.5" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelKTSModel.entertainmentService" Width="1.5" PointX="10.5" PointY="29" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelKTSModel.entertainmentType" Width="1.5" PointX="3" PointY="25.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelKTSModel.image" Width="1.5" PointX="5.25" PointY="27.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelKTSModel.invoice" Width="1.5" PointX="15.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelKTSModel.review" Width="1.5" PointX="8.25" PointY="27" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelKTSModel.room" Width="1.5" PointX="5.25" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelKTSModel.room_Service_Link" Width="1.5" PointX="10.5" PointY="25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelKTSModel.roomBooking" Width="1.5" PointX="10.5" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelKTSModel.roomService" Width="1.5" PointX="3" PointY="29.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelKTSModel.serviceType" Width="1.5" PointX="3" PointY="32.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelKTSModel.statistic" Width="1.5" PointX="3" PointY="36.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelKTSModel.tour" Width="1.5" PointX="3" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelKTSModel.tourBooking" Width="1.5" PointX="5.25" PointY="32.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelKTSModel.tourSchedule" Width="1.5" PointX="8.25" PointY="32.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelKTSModel.userAccount" Width="1.5" PointX="0.75" PointY="22.75" IsExpanded="true" />
+        <AssociationConnector Association="TravelKTSModel.FK__accommoda__perso__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__image__accommoda__72C60C4A" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__review__accommod__123EB7A3" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__room__accommodat__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__roomBooki__accom__7A672E12" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__entertain__enter__0A9D95DB" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__entertain__enter__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__entertain__perso__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__image__entertain__74AE54BC" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__review__entertai__14270015" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK_entertainment_Service" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__entertain__perso__0B91BA14" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__entertain__userI__09A971A2" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__invoice__enterta__1CBC4616" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK_entertainmentService_person" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK_service_ServiceType" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__entertain__perso__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__image__personId__75A278F5" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__image__tourId__73BA3083" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__invoice__personI__1DB06A4F" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__invoice__roomBoo__1AD3FDA4" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__invoice__tourBoo__1BC821DD" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__invoice__userId__19DFD96B" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__review__personId__151B244E" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__review__tourId__1332DBDC" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__review__userId__114A936A" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__room__personId__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__room_Serv__roomI__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__roomBooki__roomI__7B5B524B" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__room_Serv__perso__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__room_Serv__roomS__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__roomBooki__perso__7D439ABD" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__roomBooki__userI__7C4F7684" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__roomServi__perso__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__serviceTy__perso__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__statistic__perso__22751F6C" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__tour__personId__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__tourBooki__tourI__02084FDA" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__tourSched__tourI__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__tourBooki__perso__03F0984C" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__tourBooki__userI__02FC7413" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK__tourSched__perso__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelKTSModel.FK_userAccount_personId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,2364 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TravelKTSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="accommodation">
+          <Key>
+            <PropertyRef Name="accommodationId" />
+          </Key>
+          <Property Name="accommodationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="500" />
+          <Property Name="city" Type="nvarchar" MaxLength="100" />
+          <Property Name="type" Type="nvarchar" MaxLength="50" />
+          <Property Name="starRating" Type="int" />
+          <Property Name="phoneNumber" Type="varchar" MaxLength="20" />
+          <Property Name="email" Type="varchar" MaxLength="100" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="mainImage" Type="nvarchar" MaxLength="500" />
+          <Property Name="pricePerNight" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="createdAt" Type="datetime" />
+          <Property Name="status" Type="bit" />
+          <Property Name="dateEdited" Type="datetime" />
+          <Property Name="personId" Type="int" />
+        </EntityType>
+        <EntityType Name="entertainment">
+          <Key>
+            <PropertyRef Name="entertainmentId" />
+          </Key>
+          <Property Name="entertainmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="entertainmentTypeId" Type="int" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Location" Type="nvarchar" MaxLength="255" />
+          <Property Name="image" Type="nvarchar" MaxLength="500" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="openTime" Type="time" Precision="7" />
+          <Property Name="closeTime" Type="time" Precision="7" />
+          <Property Name="status" Type="bit" />
+          <Property Name="dateEdited" Type="datetime" />
+          <Property Name="personId" Type="int" />
+        </EntityType>
+        <EntityType Name="entertainmentBooking">
+          <Key>
+            <PropertyRef Name="entertainmentBookingId" />
+          </Key>
+          <Property Name="entertainmentBookingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="entertainmentId" Type="int" Nullable="false" />
+          <Property Name="bookingDate" Type="date" Nullable="false" />
+          <Property Name="departureDate" Type="date" Nullable="false" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="totalPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="status" Type="nvarchar" MaxLength="50" />
+          <Property Name="createdAt" Type="datetime" />
+          <Property Name="dateEdited" Type="datetime" />
+          <Property Name="personId" Type="int" />
+        </EntityType>
+        <EntityType Name="entertainmentService">
+          <Key>
+            <PropertyRef Name="entertainmentId" />
+            <PropertyRef Name="serviceId" />
+          </Key>
+          <Property Name="entertainmentId" Type="int" Nullable="false" />
+          <Property Name="serviceId" Type="int" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="status" Type="bit" />
+          <Property Name="dateEdited" Type="datetime" />
+          <Property Name="personId" Type="int" />
+        </EntityType>
+        <EntityType Name="entertainmentType">
+          <Key>
+            <PropertyRef Name="entertainmentTypeId" />
+          </Key>
+          <Property Name="entertainmentTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="starRating" Type="int" />
+          <Property Name="createdAt" Type="datetime" />
+          <Property Name="status" Type="bit" />
+          <Property Name="dateEdited" Type="datetime" />
+          <Property Name="personId" Type="int" />
+        </EntityType>
+        <EntityType Name="image">
+          <Key>
+            <PropertyRef Name="imageId" />
+          </Key>
+          <Property Name="imageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="accommodationId" Type="int" />
+          <Property Name="tourId" Type="int" />
+          <Property Name="entertainmentId" Type="int" />
+          <Property Name="imagePath" Type="nvarchar" MaxLength="500" />
+          <Property Name="status" Type="bit" />
+          <Property Name="dateEdited" Type="datetime" />
+          <Property Name="personId" Type="int" />
+        </EntityType>
+        <EntityType Name="invoice">
+          <Key>
+            <PropertyRef Name="invoiceId" />
+          </Key>
+          <Property Name="invoiceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="int" />
+          <Property Name="roomBookingId" Type="int" />
+          <Property Name="tourBookingId" Type="int" />
+          <Property Name="entertainmentId" Type="int" />
+          <Property Name="totalAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="createdAt" Type="datetime" />
+          <Property Name="status" Type="bit" />
+          <Property Name="dateEdited" Type="datetime" />
+          <Property Name="personId" Type="int" />
+        </EntityType>
+        <EntityType Name="review">
+          <Key>
+            <PropertyRef Name="reviewId" />
+          </Key>
+          <Property Name="reviewId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="int" />
+          <Property Name="accommodationId" Type="int" />
+          <Property Name="tourId" Type="int" />
+          <Property Name="entertainmentId" Type="int" />
+          <Property Name="rating" Type="int" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="reviewDate" Type="datetime" />
+          <Property Name="status" Type="bit" />
+          <Property Name="dateEdited" Type="datetime" />
+          <Property Name="personId" Type="int" />
+        </EntityType>
+        <EntityType Name="room">
+          <Key>
+            <PropertyRef Name="roomId" />
+          </Key>
+          <Property Name="roomId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="accommodationId" Type="int" />
+          <Property Name="roomName" Type="nvarchar" MaxLength="500" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="mainImage" Type="nvarchar" MaxLength="500" />
+          <Property Name="createdAt" Type="datetime" />
+          <Property Name="status" Type="bit" />
+          <Property Name="dateEdited" Type="datetime" />
+          <Property Name="personId" Type="int" />
+        </EntityType>
+        <EntityType Name="room_Service_Link">
+          <Key>
+            <PropertyRef Name="roomId" />
+            <PropertyRef Name="roomServiceId" />
+          </Key>
+          <Property Name="roomId" Type="int" Nullable="false" />
+          <Property Name="roomServiceId" Type="int" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="status" Type="bit" />
+          <Property Name="dateEdited" Type="datetime" />
+          <Property Name="personId" Type="int" />
+        </EntityType>
+        <EntityType Name="roomBooking">
+          <Key>
+            <PropertyRef Name="roombookingId" />
+          </Key>
+          <Property Name="roombookingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="accommodationId" Type="int" />
+          <Property Name="roomId" Type="int" />
+          <Property Name="userId" Type="int" />
+          <Property Name="bookingDate" Type="datetime" />
+          <Property Name="checkInDate" Type="datetime" />
+          <Property Name="checkOutDate" Type="datetime" />
+          <Property Name="guestCount" Type="int" />
+          <Property Name="status" Type="nvarchar" MaxLength="50" />
+          <Property Name="dateEdited" Type="datetime" />
+          <Property Name="personId" Type="int" />
+        </EntityType>
+        <EntityType Name="roomService">
+          <Key>
+            <PropertyRef Name="roomServiceId" />
+          </Key>
+          <Property Name="roomServiceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="serviceName" Type="nvarchar" MaxLength="255" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="extraCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="createdAt" Type="datetime" />
+          <Property Name="status" Type="bit" />
+          <Property Name="dateEdited" Type="datetime" />
+          <Property Name="personId" Type="int" />
+        </EntityType>
+        <EntityType Name="serviceType">
+          <Key>
+            <PropertyRef Name="serviceId" />
+          </Key>
+          <Property Name="serviceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="serviceName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="status" Type="bit" />
+          <Property Name="dateEdited" Type="datetime" />
+          <Property Name="personId" Type="int" />
+        </EntityType>
+        <EntityType Name="statistic">
+          <Key>
+            <PropertyRef Name="statisticId" />
+          </Key>
+          <Property Name="statisticId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="statisticType" Type="nvarchar" MaxLength="50" />
+          <Property Name="date" Type="date" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="totalAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="createdAt" Type="datetime" />
+          <Property Name="status" Type="bit" />
+          <Property Name="dateEdited" Type="datetime" />
+          <Property Name="personId" Type="int" />
+        </EntityType>
+        <EntityType Name="tour">
+          <Key>
+            <PropertyRef Name="tourId" />
+          </Key>
+          <Property Name="tourId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tourName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="departureLocation" Type="nvarchar" MaxLength="255" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="createdAt" Type="datetime" />
+          <Property Name="status" Type="bit" />
+          <Property Name="dateEdited" Type="datetime" />
+          <Property Name="personId" Type="int" />
+        </EntityType>
+        <EntityType Name="tourBooking">
+          <Key>
+            <PropertyRef Name="tourBookingId" />
+          </Key>
+          <Property Name="tourBookingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tourId" Type="int" />
+          <Property Name="userId" Type="int" />
+          <Property Name="bookingDate" Type="datetime" />
+          <Property Name="departureDate" Type="datetime" />
+          <Property Name="guestCount" Type="int" />
+          <Property Name="status" Type="nvarchar" MaxLength="50" />
+          <Property Name="dateEdited" Type="datetime" />
+          <Property Name="personId" Type="int" />
+        </EntityType>
+        <EntityType Name="tourSchedule">
+          <Key>
+            <PropertyRef Name="scheduleId" />
+          </Key>
+          <Property Name="scheduleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tourId" Type="int" />
+          <Property Name="startDate" Type="datetime" />
+          <Property Name="endDate" Type="datetime" />
+          <Property Name="status" Type="bit" />
+          <Property Name="dateEdited" Type="datetime" />
+          <Property Name="personId" Type="int" />
+        </EntityType>
+        <EntityType Name="userAccount">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fullName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="phoneNumber" Type="varchar" MaxLength="20" />
+          <Property Name="password" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="role" Type="int" />
+          <Property Name="createdAt" Type="datetime" />
+          <Property Name="status" Type="bit" />
+          <Property Name="dateEdited" Type="datetime" />
+          <Property Name="personId" Type="int" />
+        </EntityType>
+        <Association Name="FK__accommoda__perso__412EB0B6">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="accommodation" Type="Self.accommodation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="accommodation">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__entertain__enter__0A9D95DB">
+          <End Role="entertainment" Type="Self.entertainment" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="entertainmentBooking" Type="Self.entertainmentBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="entertainment">
+              <PropertyRef Name="entertainmentId" />
+            </Principal>
+            <Dependent Role="entertainmentBooking">
+              <PropertyRef Name="entertainmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__entertain__enter__6477ECF3">
+          <End Role="entertainmentType" Type="Self.entertainmentType" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="entertainment" Type="Self.entertainment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="entertainmentType">
+              <PropertyRef Name="entertainmentTypeId" />
+            </Principal>
+            <Dependent Role="entertainment">
+              <PropertyRef Name="entertainmentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__entertain__perso__0B91BA14">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="entertainmentBooking" Type="Self.entertainmentBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="entertainmentBooking">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__entertain__perso__60A75C0F">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="entertainmentType" Type="Self.entertainmentType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="entertainmentType">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__entertain__perso__656C112C">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="entertainment" Type="Self.entertainment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="entertainment">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__entertain__userI__09A971A2">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="1" />
+          <End Role="entertainmentBooking" Type="Self.entertainmentBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="entertainmentBooking">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__image__accommoda__72C60C4A">
+          <End Role="accommodation" Type="Self.accommodation" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="image" Type="Self.image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accommodation">
+              <PropertyRef Name="accommodationId" />
+            </Principal>
+            <Dependent Role="image">
+              <PropertyRef Name="accommodationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__image__entertain__74AE54BC">
+          <End Role="entertainment" Type="Self.entertainment" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="image" Type="Self.image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="entertainment">
+              <PropertyRef Name="entertainmentId" />
+            </Principal>
+            <Dependent Role="image">
+              <PropertyRef Name="entertainmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__image__personId__75A278F5">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="image" Type="Self.image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="image">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__image__tourId__73BA3083">
+          <End Role="tour" Type="Self.tour" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="image" Type="Self.image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tour">
+              <PropertyRef Name="tourId" />
+            </Principal>
+            <Dependent Role="image">
+              <PropertyRef Name="tourId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__invoice__enterta__1CBC4616">
+          <End Role="entertainmentBooking" Type="Self.entertainmentBooking" Multiplicity="0..1" />
+          <End Role="invoice" Type="Self.invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="entertainmentBooking">
+              <PropertyRef Name="entertainmentBookingId" />
+            </Principal>
+            <Dependent Role="invoice">
+              <PropertyRef Name="entertainmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__invoice__personI__1DB06A4F">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="invoice" Type="Self.invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="invoice">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__invoice__roomBoo__1AD3FDA4">
+          <End Role="roomBooking" Type="Self.roomBooking" Multiplicity="0..1" />
+          <End Role="invoice" Type="Self.invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roomBooking">
+              <PropertyRef Name="roombookingId" />
+            </Principal>
+            <Dependent Role="invoice">
+              <PropertyRef Name="roomBookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__invoice__tourBoo__1BC821DD">
+          <End Role="tourBooking" Type="Self.tourBooking" Multiplicity="0..1" />
+          <End Role="invoice" Type="Self.invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tourBooking">
+              <PropertyRef Name="tourBookingId" />
+            </Principal>
+            <Dependent Role="invoice">
+              <PropertyRef Name="tourBookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__invoice__userId__19DFD96B">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="invoice" Type="Self.invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="invoice">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__review__accommod__123EB7A3">
+          <End Role="accommodation" Type="Self.accommodation" Multiplicity="0..1" />
+          <End Role="review" Type="Self.review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accommodation">
+              <PropertyRef Name="accommodationId" />
+            </Principal>
+            <Dependent Role="review">
+              <PropertyRef Name="accommodationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__review__entertai__14270015">
+          <End Role="entertainment" Type="Self.entertainment" Multiplicity="0..1" />
+          <End Role="review" Type="Self.review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="entertainment">
+              <PropertyRef Name="entertainmentId" />
+            </Principal>
+            <Dependent Role="review">
+              <PropertyRef Name="entertainmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__review__personId__151B244E">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="review" Type="Self.review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="review">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__review__tourId__1332DBDC">
+          <End Role="tour" Type="Self.tour" Multiplicity="0..1" />
+          <End Role="review" Type="Self.review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tour">
+              <PropertyRef Name="tourId" />
+            </Principal>
+            <Dependent Role="review">
+              <PropertyRef Name="tourId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__review__userId__114A936A">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="review" Type="Self.review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="review">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__room__accommodat__45F365D3">
+          <End Role="accommodation" Type="Self.accommodation" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="room" Type="Self.room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accommodation">
+              <PropertyRef Name="accommodationId" />
+            </Principal>
+            <Dependent Role="room">
+              <PropertyRef Name="accommodationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__room__personId__46E78A0C">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="room" Type="Self.room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="room">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__room_Serv__perso__5165187F">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="room_Service_Link" Type="Self.room_Service_Link" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="room_Service_Link">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__room_Serv__roomI__4F7CD00D">
+          <End Role="room" Type="Self.room" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="room_Service_Link" Type="Self.room_Service_Link" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room">
+              <PropertyRef Name="roomId" />
+            </Principal>
+            <Dependent Role="room_Service_Link">
+              <PropertyRef Name="roomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__room_Serv__roomS__5070F446">
+          <End Role="roomService" Type="Self.roomService" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="room_Service_Link" Type="Self.room_Service_Link" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roomService">
+              <PropertyRef Name="roomServiceId" />
+            </Principal>
+            <Dependent Role="room_Service_Link">
+              <PropertyRef Name="roomServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__roomBooki__accom__7A672E12">
+          <End Role="accommodation" Type="Self.accommodation" Multiplicity="0..1" />
+          <End Role="roomBooking" Type="Self.roomBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accommodation">
+              <PropertyRef Name="accommodationId" />
+            </Principal>
+            <Dependent Role="roomBooking">
+              <PropertyRef Name="accommodationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__roomBooki__perso__7D439ABD">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="roomBooking" Type="Self.roomBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="roomBooking">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__roomBooki__roomI__7B5B524B">
+          <End Role="room" Type="Self.room" Multiplicity="0..1" />
+          <End Role="roomBooking" Type="Self.roomBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room">
+              <PropertyRef Name="roomId" />
+            </Principal>
+            <Dependent Role="roomBooking">
+              <PropertyRef Name="roomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__roomBooki__userI__7C4F7684">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="roomBooking" Type="Self.roomBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="roomBooking">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__roomServi__perso__4BAC3F29">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="roomService" Type="Self.roomService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="roomService">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__serviceTy__perso__693CA210">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="serviceType" Type="Self.serviceType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="serviceType">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__statistic__perso__22751F6C">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="statistic" Type="Self.statistic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="statistic">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tour__personId__5629CD9C">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="tour" Type="Self.tour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="tour">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tourBooki__perso__03F0984C">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="tourBooking" Type="Self.tourBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="tourBooking">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tourBooki__tourI__02084FDA">
+          <End Role="tour" Type="Self.tour" Multiplicity="0..1" />
+          <End Role="tourBooking" Type="Self.tourBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tour">
+              <PropertyRef Name="tourId" />
+            </Principal>
+            <Dependent Role="tourBooking">
+              <PropertyRef Name="tourId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tourBooki__userI__02FC7413">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="tourBooking" Type="Self.tourBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="tourBooking">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tourSched__perso__5AEE82B9">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="tourSchedule" Type="Self.tourSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="tourSchedule">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tourSched__tourI__59FA5E80">
+          <End Role="tour" Type="Self.tour" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tourSchedule" Type="Self.tourSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tour">
+              <PropertyRef Name="tourId" />
+            </Principal>
+            <Dependent Role="tourSchedule">
+              <PropertyRef Name="tourId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_entertainment_Service">
+          <End Role="entertainment" Type="Self.entertainment" Multiplicity="1" />
+          <End Role="entertainmentService" Type="Self.entertainmentService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="entertainment">
+              <PropertyRef Name="entertainmentId" />
+            </Principal>
+            <Dependent Role="entertainmentService">
+              <PropertyRef Name="entertainmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_entertainmentService_person">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="entertainmentService" Type="Self.entertainmentService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="entertainmentService">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_ServiceType">
+          <End Role="serviceType" Type="Self.serviceType" Multiplicity="1" />
+          <End Role="entertainmentService" Type="Self.entertainmentService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="serviceType">
+              <PropertyRef Name="serviceId" />
+            </Principal>
+            <Dependent Role="entertainmentService">
+              <PropertyRef Name="serviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_userAccount_personId">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="userAccount1" Type="Self.userAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="userAccount1">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TravelKTSModelStoreContainer">
+          <EntitySet Name="accommodation" EntityType="Self.accommodation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="entertainment" EntityType="Self.entertainment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="entertainmentBooking" EntityType="Self.entertainmentBooking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="entertainmentService" EntityType="Self.entertainmentService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="entertainmentType" EntityType="Self.entertainmentType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="image" EntityType="Self.image" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="invoice" EntityType="Self.invoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="review" EntityType="Self.review" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="room" EntityType="Self.room" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="room_Service_Link" EntityType="Self.room_Service_Link" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="roomBooking" EntityType="Self.roomBooking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="roomService" EntityType="Self.roomService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="serviceType" EntityType="Self.serviceType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="statistic" EntityType="Self.statistic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tour" EntityType="Self.tour" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tourBooking" EntityType="Self.tourBooking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tourSchedule" EntityType="Self.tourSchedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="userAccount" EntityType="Self.userAccount" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__accommoda__perso__412EB0B6" Association="Self.FK__accommoda__perso__412EB0B6">
+            <End Role="userAccount" EntitySet="userAccount" />
+            <End Role="accommodation" EntitySet="accommodation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__entertain__enter__0A9D95DB" Association="Self.FK__entertain__enter__0A9D95DB">
+            <End Role="entertainment" EntitySet="entertainment" />
+            <End Role="entertainmentBooking" EntitySet="entertainmentBooking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__entertain__enter__6477ECF3" Association="Self.FK__entertain__enter__6477ECF3">
+            <End Role="entertainmentType" EntitySet="entertainmentType" />
+            <End Role="entertainment" EntitySet="entertainment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__entertain__perso__0B91BA14" Association="Self.FK__entertain__perso__0B91BA14">
+            <End Role="userAccount" EntitySet="userAccount" />
+            <End Role="entertainmentBooking" EntitySet="entertainmentBooking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__entertain__perso__60A75C0F" Association="Self.FK__entertain__perso__60A75C0F">
+            <End Role="userAccount" EntitySet="userAccount" />
+            <End Role="entertainmentType" EntitySet="entertainmentType" />
+          </AssociationSet>
+          <AssociationSet Name="FK__entertain__perso__656C112C" Association="Self.FK__entertain__perso__656C112C">
+            <End Role="userAccount" EntitySet="userAccount" />
+            <End Role="entertainment" EntitySet="entertainment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__entertain__userI__09A971A2" Association="Self.FK__entertain__userI__09A971A2">
+            <End Role="userAccount" EntitySet="userAccount" />
+            <End Role="entertainmentBooking" EntitySet="entertainmentBooking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__image__accommoda__72C60C4A" Association="Self.FK__image__accommoda__72C60C4A">
+            <End Role="accommodation" EntitySet="accommodation" />
+            <End Role="image" EntitySet="image" />
+          </AssociationSet>
+          <AssociationSet Name="FK__image__entertain__74AE54BC" Association="Self.FK__image__entertain__74AE54BC">
+            <End Role="entertainment" EntitySet="entertainment" />
+            <End Role="image" EntitySet="image" />
+          </AssociationSet>
+          <AssociationSet Name="FK__image__personId__75A278F5" Association="Self.FK__image__personId__75A278F5">
+            <End Role="userAccount" EntitySet="userAccount" />
+            <End Role="image" EntitySet="image" />
+          </AssociationSet>
+          <AssociationSet Name="FK__image__tourId__73BA3083" Association="Self.FK__image__tourId__73BA3083">
+            <End Role="tour" EntitySet="tour" />
+            <End Role="image" EntitySet="image" />
+          </AssociationSet>
+          <AssociationSet Name="FK__invoice__enterta__1CBC4616" Association="Self.FK__invoice__enterta__1CBC4616">
+            <End Role="entertainmentBooking" EntitySet="entertainmentBooking" />
+            <End Role="invoice" EntitySet="invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__invoice__personI__1DB06A4F" Association="Self.FK__invoice__personI__1DB06A4F">
+            <End Role="userAccount" EntitySet="userAccount" />
+            <End Role="invoice" EntitySet="invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__invoice__roomBoo__1AD3FDA4" Association="Self.FK__invoice__roomBoo__1AD3FDA4">
+            <End Role="roomBooking" EntitySet="roomBooking" />
+            <End Role="invoice" EntitySet="invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__invoice__tourBoo__1BC821DD" Association="Self.FK__invoice__tourBoo__1BC821DD">
+            <End Role="tourBooking" EntitySet="tourBooking" />
+            <End Role="invoice" EntitySet="invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__invoice__userId__19DFD96B" Association="Self.FK__invoice__userId__19DFD96B">
+            <End Role="userAccount" EntitySet="userAccount" />
+            <End Role="invoice" EntitySet="invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__review__accommod__123EB7A3" Association="Self.FK__review__accommod__123EB7A3">
+            <End Role="accommodation" EntitySet="accommodation" />
+            <End Role="review" EntitySet="review" />
+          </AssociationSet>
+          <AssociationSet Name="FK__review__entertai__14270015" Association="Self.FK__review__entertai__14270015">
+            <End Role="entertainment" EntitySet="entertainment" />
+            <End Role="review" EntitySet="review" />
+          </AssociationSet>
+          <AssociationSet Name="FK__review__personId__151B244E" Association="Self.FK__review__personId__151B244E">
+            <End Role="userAccount" EntitySet="userAccount" />
+            <End Role="review" EntitySet="review" />
+          </AssociationSet>
+          <AssociationSet Name="FK__review__tourId__1332DBDC" Association="Self.FK__review__tourId__1332DBDC">
+            <End Role="tour" EntitySet="tour" />
+            <End Role="review" EntitySet="review" />
+          </AssociationSet>
+          <AssociationSet Name="FK__review__userId__114A936A" Association="Self.FK__review__userId__114A936A">
+            <End Role="userAccount" EntitySet="userAccount" />
+            <End Role="review" EntitySet="review" />
+          </AssociationSet>
+          <AssociationSet Name="FK__room__accommodat__45F365D3" Association="Self.FK__room__accommodat__45F365D3">
+            <End Role="accommodation" EntitySet="accommodation" />
+            <End Role="room" EntitySet="room" />
+          </AssociationSet>
+          <AssociationSet Name="FK__room__personId__46E78A0C" Association="Self.FK__room__personId__46E78A0C">
+            <End Role="userAccount" EntitySet="userAccount" />
+            <End Role="room" EntitySet="room" />
+          </AssociationSet>
+          <AssociationSet Name="FK__room_Serv__perso__5165187F" Association="Self.FK__room_Serv__perso__5165187F">
+            <End Role="userAccount" EntitySet="userAccount" />
+            <End Role="room_Service_Link" EntitySet="room_Service_Link" />
+          </AssociationSet>
+          <AssociationSet Name="FK__room_Serv__roomI__4F7CD00D" Association="Self.FK__room_Serv__roomI__4F7CD00D">
+            <End Role="room" EntitySet="room" />
+            <End Role="room_Service_Link" EntitySet="room_Service_Link" />
+          </AssociationSet>
+          <AssociationSet Name="FK__room_Serv__roomS__5070F446" Association="Self.FK__room_Serv__roomS__5070F446">
+            <End Role="roomService" EntitySet="roomService" />
+            <End Role="room_Service_Link" EntitySet="room_Service_Link" />
+          </AssociationSet>
+          <AssociationSet Name="FK__roomBooki__accom__7A672E12" Association="Self.FK__roomBooki__accom__7A672E12">
+            <End Role="accommodation" EntitySet="accommodation" />
+            <End Role="roomBooking" EntitySet="roomBooking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__roomBooki__perso__7D439ABD" Association="Self.FK__roomBooki__perso__7D439ABD">
+            <End Role="userAccount" EntitySet="userAccount" />
+            <End Role="roomBooking" EntitySet="roomBooking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__roomBooki__roomI__7B5B524B" Association="Self.FK__roomBooki__roomI__7B5B524B">
+            <End Role="room" EntitySet="room" />
+            <End Role="roomBooking" EntitySet="roomBooking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__roomBooki__userI__7C4F7684" Association="Self.FK__roomBooki__userI__7C4F7684">
+            <End Role="userAccount" EntitySet="userAccount" />
+            <End Role="roomBooking" EntitySet="roomBooking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__roomServi__perso__4BAC3F29" Association="Self.FK__roomServi__perso__4BAC3F29">
+            <End Role="userAccount" EntitySet="userAccount" />
+            <End Role="roomService" EntitySet="roomService" />
+          </AssociationSet>
+          <AssociationSet Name="FK__serviceTy__perso__693CA210" Association="Self.FK__serviceTy__perso__693CA210">
+            <End Role="userAccount" EntitySet="userAccount" />
+            <End Role="serviceType" EntitySet="serviceType" />
+          </AssociationSet>
+          <AssociationSet Name="FK__statistic__perso__22751F6C" Association="Self.FK__statistic__perso__22751F6C">
+            <End Role="userAccount" EntitySet="userAccount" />
+            <End Role="statistic" EntitySet="statistic" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tour__personId__5629CD9C" Association="Self.FK__tour__personId__5629CD9C">
+            <End Role="userAccount" EntitySet="userAccount" />
+            <End Role="tour" EntitySet="tour" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tourBooki__perso__03F0984C" Association="Self.FK__tourBooki__perso__03F0984C">
+            <End Role="userAccount" EntitySet="userAccount" />
+            <End Role="tourBooking" EntitySet="tourBooking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tourBooki__tourI__02084FDA" Association="Self.FK__tourBooki__tourI__02084FDA">
+            <End Role="tour" EntitySet="tour" />
+            <End Role="tourBooking" EntitySet="tourBooking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tourBooki__userI__02FC7413" Association="Self.FK__tourBooki__userI__02FC7413">
+            <End Role="userAccount" EntitySet="userAccount" />
+            <End Role="tourBooking" EntitySet="tourBooking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tourSched__perso__5AEE82B9" Association="Self.FK__tourSched__perso__5AEE82B9">
+            <End Role="userAccount" EntitySet="userAccount" />
+            <End Role="tourSchedule" EntitySet="tourSchedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tourSched__tourI__59FA5E80" Association="Self.FK__tourSched__tourI__59FA5E80">
+            <End Role="tour" EntitySet="tour" />
+            <End Role="tourSchedule" EntitySet="tourSchedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_entertainment_Service" Association="Self.FK_entertainment_Service">
+            <End Role="entertainment" EntitySet="entertainment" />
+            <End Role="entertainmentService" EntitySet="entertainmentService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_entertainmentService_person" Association="Self.FK_entertainmentService_person">
+            <End Role="userAccount" EntitySet="userAccount" />
+            <End Role="entertainmentService" EntitySet="entertainmentService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_ServiceType" Association="Self.FK_service_ServiceType">
+            <End Role="serviceType" EntitySet="serviceType" />
+            <End Role="entertainmentService" EntitySet="entertainmentService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_userAccount_personId" Association="Self.FK_userAccount_personId">
+            <End Role="userAccount" EntitySet="userAccount" />
+            <End Role="userAccount1" EntitySet="userAccount" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TravelKTSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="accommodation">
+          <Key>
+            <PropertyRef Name="accommodationId" />
+          </Key>
+          <Property Name="accommodationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="starRating" Type="Int32" />
+          <Property Name="phoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="mainImage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="pricePerNight" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="createdAt" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="dateEdited" Type="DateTime" Precision="3" />
+          <Property Name="personId" Type="Int32" />
+          <NavigationProperty Name="userAccount" Relationship="Self.FK__accommoda__perso__412EB0B6" FromRole="accommodation" ToRole="userAccount" />
+          <NavigationProperty Name="images" Relationship="Self.FK__image__accommoda__72C60C4A" FromRole="accommodation" ToRole="image" />
+          <NavigationProperty Name="reviews" Relationship="Self.FK__review__accommod__123EB7A3" FromRole="accommodation" ToRole="review" />
+          <NavigationProperty Name="rooms" Relationship="Self.FK__room__accommodat__45F365D3" FromRole="accommodation" ToRole="room" />
+          <NavigationProperty Name="roomBookings" Relationship="Self.FK__roomBooki__accom__7A672E12" FromRole="accommodation" ToRole="roomBooking" />
+        </EntityType>
+        <EntityType Name="entertainment">
+          <Key>
+            <PropertyRef Name="entertainmentId" />
+          </Key>
+          <Property Name="entertainmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="entertainmentTypeId" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="openTime" Type="Time" Precision="7" />
+          <Property Name="closeTime" Type="Time" Precision="7" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="dateEdited" Type="DateTime" Precision="3" />
+          <Property Name="personId" Type="Int32" />
+          <NavigationProperty Name="entertainmentBookings" Relationship="Self.FK__entertain__enter__0A9D95DB" FromRole="entertainment" ToRole="entertainmentBooking" />
+          <NavigationProperty Name="entertainmentType" Relationship="Self.FK__entertain__enter__6477ECF3" FromRole="entertainment" ToRole="entertainmentType" />
+          <NavigationProperty Name="userAccount" Relationship="Self.FK__entertain__perso__656C112C" FromRole="entertainment" ToRole="userAccount" />
+          <NavigationProperty Name="images" Relationship="Self.FK__image__entertain__74AE54BC" FromRole="entertainment" ToRole="image" />
+          <NavigationProperty Name="reviews" Relationship="Self.FK__review__entertai__14270015" FromRole="entertainment" ToRole="review" />
+          <NavigationProperty Name="entertainmentServices" Relationship="Self.FK_entertainment_Service" FromRole="entertainment" ToRole="entertainmentService" />
+        </EntityType>
+        <EntityType Name="entertainmentBooking">
+          <Key>
+            <PropertyRef Name="entertainmentBookingId" />
+          </Key>
+          <Property Name="entertainmentBookingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="entertainmentId" Type="Int32" Nullable="false" />
+          <Property Name="bookingDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="departureDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="totalPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="createdAt" Type="DateTime" Precision="3" />
+          <Property Name="dateEdited" Type="DateTime" Precision="3" />
+          <Property Name="personId" Type="Int32" />
+          <NavigationProperty Name="entertainment" Relationship="Self.FK__entertain__enter__0A9D95DB" FromRole="entertainmentBooking" ToRole="entertainment" />
+          <NavigationProperty Name="userAccount" Relationship="Self.FK__entertain__perso__0B91BA14" FromRole="entertainmentBooking" ToRole="userAccount" />
+          <NavigationProperty Name="userAccount1" Relationship="Self.FK__entertain__userI__09A971A2" FromRole="entertainmentBooking" ToRole="userAccount" />
+          <NavigationProperty Name="invoices" Relationship="Self.FK__invoice__enterta__1CBC4616" FromRole="entertainmentBooking" ToRole="invoice" />
+        </EntityType>
+        <EntityType Name="entertainmentService">
+          <Key>
+            <PropertyRef Name="entertainmentId" />
+            <PropertyRef Name="serviceId" />
+          </Key>
+          <Property Name="entertainmentId" Type="Int32" Nullable="false" />
+          <Property Name="serviceId" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="dateEdited" Type="DateTime" Precision="3" />
+          <Property Name="personId" Type="Int32" />
+          <NavigationProperty Name="entertainment" Relationship="Self.FK_entertainment_Service" FromRole="entertainmentService" ToRole="entertainment" />
+          <NavigationProperty Name="userAccount" Relationship="Self.FK_entertainmentService_person" FromRole="entertainmentService" ToRole="userAccount" />
+          <NavigationProperty Name="serviceType" Relationship="Self.FK_service_ServiceType" FromRole="entertainmentService" ToRole="serviceType" />
+        </EntityType>
+        <EntityType Name="entertainmentType">
+          <Key>
+            <PropertyRef Name="entertainmentTypeId" />
+          </Key>
+          <Property Name="entertainmentTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="starRating" Type="Int32" />
+          <Property Name="createdAt" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="dateEdited" Type="DateTime" Precision="3" />
+          <Property Name="personId" Type="Int32" />
+          <NavigationProperty Name="entertainments" Relationship="Self.FK__entertain__enter__6477ECF3" FromRole="entertainmentType" ToRole="entertainment" />
+          <NavigationProperty Name="userAccount" Relationship="Self.FK__entertain__perso__60A75C0F" FromRole="entertainmentType" ToRole="userAccount" />
+        </EntityType>
+        <EntityType Name="image">
+          <Key>
+            <PropertyRef Name="imageId" />
+          </Key>
+          <Property Name="imageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="accommodationId" Type="Int32" />
+          <Property Name="tourId" Type="Int32" />
+          <Property Name="entertainmentId" Type="Int32" />
+          <Property Name="imagePath" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="dateEdited" Type="DateTime" Precision="3" />
+          <Property Name="personId" Type="Int32" />
+          <NavigationProperty Name="accommodation" Relationship="Self.FK__image__accommoda__72C60C4A" FromRole="image" ToRole="accommodation" />
+          <NavigationProperty Name="entertainment" Relationship="Self.FK__image__entertain__74AE54BC" FromRole="image" ToRole="entertainment" />
+          <NavigationProperty Name="userAccount" Relationship="Self.FK__image__personId__75A278F5" FromRole="image" ToRole="userAccount" />
+          <NavigationProperty Name="tour" Relationship="Self.FK__image__tourId__73BA3083" FromRole="image" ToRole="tour" />
+        </EntityType>
+        <EntityType Name="invoice">
+          <Key>
+            <PropertyRef Name="invoiceId" />
+          </Key>
+          <Property Name="invoiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="roomBookingId" Type="Int32" />
+          <Property Name="tourBookingId" Type="Int32" />
+          <Property Name="entertainmentId" Type="Int32" />
+          <Property Name="totalAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="createdAt" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="dateEdited" Type="DateTime" Precision="3" />
+          <Property Name="personId" Type="Int32" />
+          <NavigationProperty Name="entertainmentBooking" Relationship="Self.FK__invoice__enterta__1CBC4616" FromRole="invoice" ToRole="entertainmentBooking" />
+          <NavigationProperty Name="userAccount" Relationship="Self.FK__invoice__personI__1DB06A4F" FromRole="invoice" ToRole="userAccount" />
+          <NavigationProperty Name="roomBooking" Relationship="Self.FK__invoice__roomBoo__1AD3FDA4" FromRole="invoice" ToRole="roomBooking" />
+          <NavigationProperty Name="tourBooking" Relationship="Self.FK__invoice__tourBoo__1BC821DD" FromRole="invoice" ToRole="tourBooking" />
+          <NavigationProperty Name="userAccount1" Relationship="Self.FK__invoice__userId__19DFD96B" FromRole="invoice" ToRole="userAccount" />
+        </EntityType>
+        <EntityType Name="review">
+          <Key>
+            <PropertyRef Name="reviewId" />
+          </Key>
+          <Property Name="reviewId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="accommodationId" Type="Int32" />
+          <Property Name="tourId" Type="Int32" />
+          <Property Name="entertainmentId" Type="Int32" />
+          <Property Name="rating" Type="Int32" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="reviewDate" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="dateEdited" Type="DateTime" Precision="3" />
+          <Property Name="personId" Type="Int32" />
+          <NavigationProperty Name="accommodation" Relationship="Self.FK__review__accommod__123EB7A3" FromRole="review" ToRole="accommodation" />
+          <NavigationProperty Name="entertainment" Relationship="Self.FK__review__entertai__14270015" FromRole="review" ToRole="entertainment" />
+          <NavigationProperty Name="userAccount" Relationship="Self.FK__review__personId__151B244E" FromRole="review" ToRole="userAccount" />
+          <NavigationProperty Name="tour" Relationship="Self.FK__review__tourId__1332DBDC" FromRole="review" ToRole="tour" />
+          <NavigationProperty Name="userAccount1" Relationship="Self.FK__review__userId__114A936A" FromRole="review" ToRole="userAccount" />
+        </EntityType>
+        <EntityType Name="room">
+          <Key>
+            <PropertyRef Name="roomId" />
+          </Key>
+          <Property Name="roomId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="accommodationId" Type="Int32" />
+          <Property Name="roomName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="mainImage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="createdAt" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="dateEdited" Type="DateTime" Precision="3" />
+          <Property Name="personId" Type="Int32" />
+          <NavigationProperty Name="accommodation" Relationship="Self.FK__room__accommodat__45F365D3" FromRole="room" ToRole="accommodation" />
+          <NavigationProperty Name="userAccount" Relationship="Self.FK__room__personId__46E78A0C" FromRole="room" ToRole="userAccount" />
+          <NavigationProperty Name="room_Service_Link" Relationship="Self.FK__room_Serv__roomI__4F7CD00D" FromRole="room" ToRole="room_Service_Link" />
+          <NavigationProperty Name="roomBookings" Relationship="Self.FK__roomBooki__roomI__7B5B524B" FromRole="room" ToRole="roomBooking" />
+        </EntityType>
+        <EntityType Name="room_Service_Link">
+          <Key>
+            <PropertyRef Name="roomId" />
+            <PropertyRef Name="roomServiceId" />
+          </Key>
+          <Property Name="roomId" Type="Int32" Nullable="false" />
+          <Property Name="roomServiceId" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="dateEdited" Type="DateTime" Precision="3" />
+          <Property Name="personId" Type="Int32" />
+          <NavigationProperty Name="room" Relationship="Self.FK__room_Serv__roomI__4F7CD00D" FromRole="room_Service_Link" ToRole="room" />
+          <NavigationProperty Name="userAccount" Relationship="Self.FK__room_Serv__perso__5165187F" FromRole="room_Service_Link" ToRole="userAccount" />
+          <NavigationProperty Name="roomService" Relationship="Self.FK__room_Serv__roomS__5070F446" FromRole="room_Service_Link" ToRole="roomService" />
+        </EntityType>
+        <EntityType Name="roomBooking">
+          <Key>
+            <PropertyRef Name="roombookingId" />
+          </Key>
+          <Property Name="roombookingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="accommodationId" Type="Int32" />
+          <Property Name="roomId" Type="Int32" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="bookingDate" Type="DateTime" Precision="3" />
+          <Property Name="checkInDate" Type="DateTime" Precision="3" />
+          <Property Name="checkOutDate" Type="DateTime" Precision="3" />
+          <Property Name="guestCount" Type="Int32" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dateEdited" Type="DateTime" Precision="3" />
+          <Property Name="personId" Type="Int32" />
+          <NavigationProperty Name="accommodation" Relationship="Self.FK__roomBooki__accom__7A672E12" FromRole="roomBooking" ToRole="accommodation" />
+          <NavigationProperty Name="invoices" Relationship="Self.FK__invoice__roomBoo__1AD3FDA4" FromRole="roomBooking" ToRole="invoice" />
+          <NavigationProperty Name="room" Relationship="Self.FK__roomBooki__roomI__7B5B524B" FromRole="roomBooking" ToRole="room" />
+          <NavigationProperty Name="userAccount" Relationship="Self.FK__roomBooki__perso__7D439ABD" FromRole="roomBooking" ToRole="userAccount" />
+          <NavigationProperty Name="userAccount1" Relationship="Self.FK__roomBooki__userI__7C4F7684" FromRole="roomBooking" ToRole="userAccount" />
+        </EntityType>
+        <EntityType Name="roomService">
+          <Key>
+            <PropertyRef Name="roomServiceId" />
+          </Key>
+          <Property Name="roomServiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="serviceName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="extraCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="createdAt" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="dateEdited" Type="DateTime" Precision="3" />
+          <Property Name="personId" Type="Int32" />
+          <NavigationProperty Name="room_Service_Link" Relationship="Self.FK__room_Serv__roomS__5070F446" FromRole="roomService" ToRole="room_Service_Link" />
+          <NavigationProperty Name="userAccount" Relationship="Self.FK__roomServi__perso__4BAC3F29" FromRole="roomService" ToRole="userAccount" />
+        </EntityType>
+        <EntityType Name="serviceType">
+          <Key>
+            <PropertyRef Name="serviceId" />
+          </Key>
+          <Property Name="serviceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="serviceName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="dateEdited" Type="DateTime" Precision="3" />
+          <Property Name="personId" Type="Int32" />
+          <NavigationProperty Name="entertainmentServices" Relationship="Self.FK_service_ServiceType" FromRole="serviceType" ToRole="entertainmentService" />
+          <NavigationProperty Name="userAccount" Relationship="Self.FK__serviceTy__perso__693CA210" FromRole="serviceType" ToRole="userAccount" />
+        </EntityType>
+        <EntityType Name="statistic">
+          <Key>
+            <PropertyRef Name="statisticId" />
+          </Key>
+          <Property Name="statisticId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="statisticType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="totalAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="createdAt" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="dateEdited" Type="DateTime" Precision="3" />
+          <Property Name="personId" Type="Int32" />
+          <NavigationProperty Name="userAccount" Relationship="Self.FK__statistic__perso__22751F6C" FromRole="statistic" ToRole="userAccount" />
+        </EntityType>
+        <EntityType Name="tour">
+          <Key>
+            <PropertyRef Name="tourId" />
+          </Key>
+          <Property Name="tourId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tourName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="departureLocation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="createdAt" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="dateEdited" Type="DateTime" Precision="3" />
+          <Property Name="personId" Type="Int32" />
+          <NavigationProperty Name="images" Relationship="Self.FK__image__tourId__73BA3083" FromRole="tour" ToRole="image" />
+          <NavigationProperty Name="reviews" Relationship="Self.FK__review__tourId__1332DBDC" FromRole="tour" ToRole="review" />
+          <NavigationProperty Name="userAccount" Relationship="Self.FK__tour__personId__5629CD9C" FromRole="tour" ToRole="userAccount" />
+          <NavigationProperty Name="tourBookings" Relationship="Self.FK__tourBooki__tourI__02084FDA" FromRole="tour" ToRole="tourBooking" />
+          <NavigationProperty Name="tourSchedules" Relationship="Self.FK__tourSched__tourI__59FA5E80" FromRole="tour" ToRole="tourSchedule" />
+        </EntityType>
+        <EntityType Name="tourBooking">
+          <Key>
+            <PropertyRef Name="tourBookingId" />
+          </Key>
+          <Property Name="tourBookingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tourId" Type="Int32" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="bookingDate" Type="DateTime" Precision="3" />
+          <Property Name="departureDate" Type="DateTime" Precision="3" />
+          <Property Name="guestCount" Type="Int32" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dateEdited" Type="DateTime" Precision="3" />
+          <Property Name="personId" Type="Int32" />
+          <NavigationProperty Name="invoices" Relationship="Self.FK__invoice__tourBoo__1BC821DD" FromRole="tourBooking" ToRole="invoice" />
+          <NavigationProperty Name="tour" Relationship="Self.FK__tourBooki__tourI__02084FDA" FromRole="tourBooking" ToRole="tour" />
+          <NavigationProperty Name="userAccount" Relationship="Self.FK__tourBooki__perso__03F0984C" FromRole="tourBooking" ToRole="userAccount" />
+          <NavigationProperty Name="userAccount1" Relationship="Self.FK__tourBooki__userI__02FC7413" FromRole="tourBooking" ToRole="userAccount" />
+        </EntityType>
+        <EntityType Name="tourSchedule">
+          <Key>
+            <PropertyRef Name="scheduleId" />
+          </Key>
+          <Property Name="scheduleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tourId" Type="Int32" />
+          <Property Name="startDate" Type="DateTime" Precision="3" />
+          <Property Name="endDate" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="dateEdited" Type="DateTime" Precision="3" />
+          <Property Name="personId" Type="Int32" />
+          <NavigationProperty Name="tour" Relationship="Self.FK__tourSched__tourI__59FA5E80" FromRole="tourSchedule" ToRole="tour" />
+          <NavigationProperty Name="userAccount" Relationship="Self.FK__tourSched__perso__5AEE82B9" FromRole="tourSchedule" ToRole="userAccount" />
+        </EntityType>
+        <EntityType Name="userAccount">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fullName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="role" Type="Int32" />
+          <Property Name="createdAt" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="dateEdited" Type="DateTime" Precision="3" />
+          <Property Name="personId" Type="Int32" />
+          <NavigationProperty Name="accommodations" Relationship="Self.FK__accommoda__perso__412EB0B6" FromRole="userAccount" ToRole="accommodation" />
+          <NavigationProperty Name="entertainments" Relationship="Self.FK__entertain__perso__656C112C" FromRole="userAccount" ToRole="entertainment" />
+          <NavigationProperty Name="entertainmentBookings" Relationship="Self.FK__entertain__perso__0B91BA14" FromRole="userAccount" ToRole="entertainmentBooking" />
+          <NavigationProperty Name="entertainmentBookings1" Relationship="Self.FK__entertain__userI__09A971A2" FromRole="userAccount" ToRole="entertainmentBooking" />
+          <NavigationProperty Name="entertainmentServices" Relationship="Self.FK_entertainmentService_person" FromRole="userAccount" ToRole="entertainmentService" />
+          <NavigationProperty Name="entertainmentTypes" Relationship="Self.FK__entertain__perso__60A75C0F" FromRole="userAccount" ToRole="entertainmentType" />
+          <NavigationProperty Name="images" Relationship="Self.FK__image__personId__75A278F5" FromRole="userAccount" ToRole="image" />
+          <NavigationProperty Name="invoices" Relationship="Self.FK__invoice__personI__1DB06A4F" FromRole="userAccount" ToRole="invoice" />
+          <NavigationProperty Name="invoices1" Relationship="Self.FK__invoice__userId__19DFD96B" FromRole="userAccount" ToRole="invoice" />
+          <NavigationProperty Name="reviews" Relationship="Self.FK__review__personId__151B244E" FromRole="userAccount" ToRole="review" />
+          <NavigationProperty Name="reviews1" Relationship="Self.FK__review__userId__114A936A" FromRole="userAccount" ToRole="review" />
+          <NavigationProperty Name="rooms" Relationship="Self.FK__room__personId__46E78A0C" FromRole="userAccount" ToRole="room" />
+          <NavigationProperty Name="room_Service_Link" Relationship="Self.FK__room_Serv__perso__5165187F" FromRole="userAccount" ToRole="room_Service_Link" />
+          <NavigationProperty Name="roomBookings" Relationship="Self.FK__roomBooki__perso__7D439ABD" FromRole="userAccount" ToRole="roomBooking" />
+          <NavigationProperty Name="roomBookings1" Relationship="Self.FK__roomBooki__userI__7C4F7684" FromRole="userAccount" ToRole="roomBooking" />
+          <NavigationProperty Name="roomServices" Relationship="Self.FK__roomServi__perso__4BAC3F29" FromRole="userAccount" ToRole="roomService" />
+          <NavigationProperty Name="serviceTypes" Relationship="Self.FK__serviceTy__perso__693CA210" FromRole="userAccount" ToRole="serviceType" />
+          <NavigationProperty Name="statistics" Relationship="Self.FK__statistic__perso__22751F6C" FromRole="userAccount" ToRole="statistic" />
+          <NavigationProperty Name="tours" Relationship="Self.FK__tour__personId__5629CD9C" FromRole="userAccount" ToRole="tour" />
+          <NavigationProperty Name="tourBookings" Relationship="Self.FK__tourBooki__perso__03F0984C" FromRole="userAccount" ToRole="tourBooking" />
+          <NavigationProperty Name="tourBookings1" Relationship="Self.FK__tourBooki__userI__02FC7413" FromRole="userAccount" ToRole="tourBooking" />
+          <NavigationProperty Name="tourSchedules" Relationship="Self.FK__tourSched__perso__5AEE82B9" FromRole="userAccount" ToRole="tourSchedule" />
+          <NavigationProperty Name="userAccount1" Relationship="Self.FK_userAccount_personId" FromRole="userAccount" ToRole="userAccount1" />
+          <NavigationProperty Name="userAccount2" Relationship="Self.FK_userAccount_personId" FromRole="userAccount1" ToRole="userAccount" />
+        </EntityType>
+        <Association Name="FK__accommoda__perso__412EB0B6">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="accommodation" Type="Self.accommodation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="accommodation">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__image__accommoda__72C60C4A">
+          <End Role="accommodation" Type="Self.accommodation" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="image" Type="Self.image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accommodation">
+              <PropertyRef Name="accommodationId" />
+            </Principal>
+            <Dependent Role="image">
+              <PropertyRef Name="accommodationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__review__accommod__123EB7A3">
+          <End Role="accommodation" Type="Self.accommodation" Multiplicity="0..1" />
+          <End Role="review" Type="Self.review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accommodation">
+              <PropertyRef Name="accommodationId" />
+            </Principal>
+            <Dependent Role="review">
+              <PropertyRef Name="accommodationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__room__accommodat__45F365D3">
+          <End Role="accommodation" Type="Self.accommodation" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="room" Type="Self.room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accommodation">
+              <PropertyRef Name="accommodationId" />
+            </Principal>
+            <Dependent Role="room">
+              <PropertyRef Name="accommodationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__roomBooki__accom__7A672E12">
+          <End Role="accommodation" Type="Self.accommodation" Multiplicity="0..1" />
+          <End Role="roomBooking" Type="Self.roomBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accommodation">
+              <PropertyRef Name="accommodationId" />
+            </Principal>
+            <Dependent Role="roomBooking">
+              <PropertyRef Name="accommodationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__entertain__enter__0A9D95DB">
+          <End Role="entertainment" Type="Self.entertainment" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="entertainmentBooking" Type="Self.entertainmentBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="entertainment">
+              <PropertyRef Name="entertainmentId" />
+            </Principal>
+            <Dependent Role="entertainmentBooking">
+              <PropertyRef Name="entertainmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__entertain__enter__6477ECF3">
+          <End Role="entertainmentType" Type="Self.entertainmentType" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="entertainment" Type="Self.entertainment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="entertainmentType">
+              <PropertyRef Name="entertainmentTypeId" />
+            </Principal>
+            <Dependent Role="entertainment">
+              <PropertyRef Name="entertainmentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__entertain__perso__656C112C">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="entertainment" Type="Self.entertainment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="entertainment">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__image__entertain__74AE54BC">
+          <End Role="entertainment" Type="Self.entertainment" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="image" Type="Self.image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="entertainment">
+              <PropertyRef Name="entertainmentId" />
+            </Principal>
+            <Dependent Role="image">
+              <PropertyRef Name="entertainmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__review__entertai__14270015">
+          <End Role="entertainment" Type="Self.entertainment" Multiplicity="0..1" />
+          <End Role="review" Type="Self.review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="entertainment">
+              <PropertyRef Name="entertainmentId" />
+            </Principal>
+            <Dependent Role="review">
+              <PropertyRef Name="entertainmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_entertainment_Service">
+          <End Role="entertainment" Type="Self.entertainment" Multiplicity="1" />
+          <End Role="entertainmentService" Type="Self.entertainmentService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="entertainment">
+              <PropertyRef Name="entertainmentId" />
+            </Principal>
+            <Dependent Role="entertainmentService">
+              <PropertyRef Name="entertainmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__entertain__perso__0B91BA14">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="entertainmentBooking" Type="Self.entertainmentBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="entertainmentBooking">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__entertain__userI__09A971A2">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="1" />
+          <End Role="entertainmentBooking" Type="Self.entertainmentBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="entertainmentBooking">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__invoice__enterta__1CBC4616">
+          <End Role="entertainmentBooking" Type="Self.entertainmentBooking" Multiplicity="0..1" />
+          <End Role="invoice" Type="Self.invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="entertainmentBooking">
+              <PropertyRef Name="entertainmentBookingId" />
+            </Principal>
+            <Dependent Role="invoice">
+              <PropertyRef Name="entertainmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_entertainmentService_person">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="entertainmentService" Type="Self.entertainmentService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="entertainmentService">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_ServiceType">
+          <End Role="serviceType" Type="Self.serviceType" Multiplicity="1" />
+          <End Role="entertainmentService" Type="Self.entertainmentService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="serviceType">
+              <PropertyRef Name="serviceId" />
+            </Principal>
+            <Dependent Role="entertainmentService">
+              <PropertyRef Name="serviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__entertain__perso__60A75C0F">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="entertainmentType" Type="Self.entertainmentType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="entertainmentType">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__image__personId__75A278F5">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="image" Type="Self.image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="image">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__image__tourId__73BA3083">
+          <End Role="tour" Type="Self.tour" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="image" Type="Self.image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tour">
+              <PropertyRef Name="tourId" />
+            </Principal>
+            <Dependent Role="image">
+              <PropertyRef Name="tourId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__invoice__personI__1DB06A4F">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="invoice" Type="Self.invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="invoice">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__invoice__roomBoo__1AD3FDA4">
+          <End Role="roomBooking" Type="Self.roomBooking" Multiplicity="0..1" />
+          <End Role="invoice" Type="Self.invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roomBooking">
+              <PropertyRef Name="roombookingId" />
+            </Principal>
+            <Dependent Role="invoice">
+              <PropertyRef Name="roomBookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__invoice__tourBoo__1BC821DD">
+          <End Role="tourBooking" Type="Self.tourBooking" Multiplicity="0..1" />
+          <End Role="invoice" Type="Self.invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tourBooking">
+              <PropertyRef Name="tourBookingId" />
+            </Principal>
+            <Dependent Role="invoice">
+              <PropertyRef Name="tourBookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__invoice__userId__19DFD96B">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="invoice" Type="Self.invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="invoice">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__review__personId__151B244E">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="review" Type="Self.review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="review">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__review__tourId__1332DBDC">
+          <End Role="tour" Type="Self.tour" Multiplicity="0..1" />
+          <End Role="review" Type="Self.review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tour">
+              <PropertyRef Name="tourId" />
+            </Principal>
+            <Dependent Role="review">
+              <PropertyRef Name="tourId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__review__userId__114A936A">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="review" Type="Self.review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="review">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__room__personId__46E78A0C">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="room" Type="Self.room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="room">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__room_Serv__roomI__4F7CD00D">
+          <End Role="room" Type="Self.room" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="room_Service_Link" Type="Self.room_Service_Link" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room">
+              <PropertyRef Name="roomId" />
+            </Principal>
+            <Dependent Role="room_Service_Link">
+              <PropertyRef Name="roomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__roomBooki__roomI__7B5B524B">
+          <End Role="room" Type="Self.room" Multiplicity="0..1" />
+          <End Role="roomBooking" Type="Self.roomBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room">
+              <PropertyRef Name="roomId" />
+            </Principal>
+            <Dependent Role="roomBooking">
+              <PropertyRef Name="roomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__room_Serv__perso__5165187F">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="room_Service_Link" Type="Self.room_Service_Link" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="room_Service_Link">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__room_Serv__roomS__5070F446">
+          <End Role="roomService" Type="Self.roomService" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="room_Service_Link" Type="Self.room_Service_Link" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roomService">
+              <PropertyRef Name="roomServiceId" />
+            </Principal>
+            <Dependent Role="room_Service_Link">
+              <PropertyRef Name="roomServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__roomBooki__perso__7D439ABD">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="roomBooking" Type="Self.roomBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="roomBooking">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__roomBooki__userI__7C4F7684">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="roomBooking" Type="Self.roomBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="roomBooking">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__roomServi__perso__4BAC3F29">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="roomService" Type="Self.roomService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="roomService">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__serviceTy__perso__693CA210">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="serviceType" Type="Self.serviceType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="serviceType">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__statistic__perso__22751F6C">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="statistic" Type="Self.statistic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="statistic">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tour__personId__5629CD9C">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="tour" Type="Self.tour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="tour">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tourBooki__tourI__02084FDA">
+          <End Role="tour" Type="Self.tour" Multiplicity="0..1" />
+          <End Role="tourBooking" Type="Self.tourBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tour">
+              <PropertyRef Name="tourId" />
+            </Principal>
+            <Dependent Role="tourBooking">
+              <PropertyRef Name="tourId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tourSched__tourI__59FA5E80">
+          <End Role="tour" Type="Self.tour" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tourSchedule" Type="Self.tourSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tour">
+              <PropertyRef Name="tourId" />
+            </Principal>
+            <Dependent Role="tourSchedule">
+              <PropertyRef Name="tourId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tourBooki__perso__03F0984C">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="tourBooking" Type="Self.tourBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="tourBooking">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tourBooki__userI__02FC7413">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="tourBooking" Type="Self.tourBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="tourBooking">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tourSched__perso__5AEE82B9">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="tourSchedule" Type="Self.tourSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="tourSchedule">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_userAccount_personId">
+          <End Role="userAccount" Type="Self.userAccount" Multiplicity="0..1" />
+          <End Role="userAccount1" Type="Self.userAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccount">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="userAccount1">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TravelKTSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="accommodations" EntityType="Self.accommodation" />
+          <EntitySet Name="entertainments" EntityType="Self.entertainment" />
+          <EntitySet Name="entertainmentBookings" EntityType="Self.entertainmentBooking" />
+          <EntitySet Name="entertainmentServices" EntityType="Self.entertainmentService" />
+          <EntitySet Name="entertainmentTypes" EntityType="Self.entertainmentType" />
+          <EntitySet Name="images" EntityType="Self.image" />
+          <EntitySet Name="invoices" EntityType="Self.invoice" />
+          <EntitySet Name="reviews" EntityType="Self.review" />
+          <EntitySet Name="rooms" EntityType="Self.room" />
+          <EntitySet Name="room_Service_Link" EntityType="Self.room_Service_Link" />
+          <EntitySet Name="roomBookings" EntityType="Self.roomBooking" />
+          <EntitySet Name="roomServices" EntityType="Self.roomService" />
+          <EntitySet Name="serviceTypes" EntityType="Self.serviceType" />
+          <EntitySet Name="statistics" EntityType="Self.statistic" />
+          <EntitySet Name="tours" EntityType="Self.tour" />
+          <EntitySet Name="tourBookings" EntityType="Self.tourBooking" />
+          <EntitySet Name="tourSchedules" EntityType="Self.tourSchedule" />
+          <EntitySet Name="userAccounts" EntityType="Self.userAccount" />
+          <AssociationSet Name="FK__accommoda__perso__412EB0B6" Association="Self.FK__accommoda__perso__412EB0B6">
+            <End Role="userAccount" EntitySet="userAccounts" />
+            <End Role="accommodation" EntitySet="accommodations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__image__accommoda__72C60C4A" Association="Self.FK__image__accommoda__72C60C4A">
+            <End Role="accommodation" EntitySet="accommodations" />
+            <End Role="image" EntitySet="images" />
+          </AssociationSet>
+          <AssociationSet Name="FK__review__accommod__123EB7A3" Association="Self.FK__review__accommod__123EB7A3">
+            <End Role="accommodation" EntitySet="accommodations" />
+            <End Role="review" EntitySet="reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__room__accommodat__45F365D3" Association="Self.FK__room__accommodat__45F365D3">
+            <End Role="accommodation" EntitySet="accommodations" />
+            <End Role="room" EntitySet="rooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__roomBooki__accom__7A672E12" Association="Self.FK__roomBooki__accom__7A672E12">
+            <End Role="accommodation" EntitySet="accommodations" />
+            <End Role="roomBooking" EntitySet="roomBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__entertain__enter__0A9D95DB" Association="Self.FK__entertain__enter__0A9D95DB">
+            <End Role="entertainment" EntitySet="entertainments" />
+            <End Role="entertainmentBooking" EntitySet="entertainmentBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__entertain__enter__6477ECF3" Association="Self.FK__entertain__enter__6477ECF3">
+            <End Role="entertainmentType" EntitySet="entertainmentTypes" />
+            <End Role="entertainment" EntitySet="entertainments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__entertain__perso__656C112C" Association="Self.FK__entertain__perso__656C112C">
+            <End Role="userAccount" EntitySet="userAccounts" />
+            <End Role="entertainment" EntitySet="entertainments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__image__entertain__74AE54BC" Association="Self.FK__image__entertain__74AE54BC">
+            <End Role="entertainment" EntitySet="entertainments" />
+            <End Role="image" EntitySet="images" />
+          </AssociationSet>
+          <AssociationSet Name="FK__review__entertai__14270015" Association="Self.FK__review__entertai__14270015">
+            <End Role="entertainment" EntitySet="entertainments" />
+            <End Role="review" EntitySet="reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_entertainment_Service" Association="Self.FK_entertainment_Service">
+            <End Role="entertainment" EntitySet="entertainments" />
+            <End Role="entertainmentService" EntitySet="entertainmentServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__entertain__perso__0B91BA14" Association="Self.FK__entertain__perso__0B91BA14">
+            <End Role="userAccount" EntitySet="userAccounts" />
+            <End Role="entertainmentBooking" EntitySet="entertainmentBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__entertain__userI__09A971A2" Association="Self.FK__entertain__userI__09A971A2">
+            <End Role="userAccount" EntitySet="userAccounts" />
+            <End Role="entertainmentBooking" EntitySet="entertainmentBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__invoice__enterta__1CBC4616" Association="Self.FK__invoice__enterta__1CBC4616">
+            <End Role="entertainmentBooking" EntitySet="entertainmentBookings" />
+            <End Role="invoice" EntitySet="invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_entertainmentService_person" Association="Self.FK_entertainmentService_person">
+            <End Role="userAccount" EntitySet="userAccounts" />
+            <End Role="entertainmentService" EntitySet="entertainmentServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_ServiceType" Association="Self.FK_service_ServiceType">
+            <End Role="serviceType" EntitySet="serviceTypes" />
+            <End Role="entertainmentService" EntitySet="entertainmentServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__entertain__perso__60A75C0F" Association="Self.FK__entertain__perso__60A75C0F">
+            <End Role="userAccount" EntitySet="userAccounts" />
+            <End Role="entertainmentType" EntitySet="entertainmentTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__image__personId__75A278F5" Association="Self.FK__image__personId__75A278F5">
+            <End Role="userAccount" EntitySet="userAccounts" />
+            <End Role="image" EntitySet="images" />
+          </AssociationSet>
+          <AssociationSet Name="FK__image__tourId__73BA3083" Association="Self.FK__image__tourId__73BA3083">
+            <End Role="tour" EntitySet="tours" />
+            <End Role="image" EntitySet="images" />
+          </AssociationSet>
+          <AssociationSet Name="FK__invoice__personI__1DB06A4F" Association="Self.FK__invoice__personI__1DB06A4F">
+            <End Role="userAccount" EntitySet="userAccounts" />
+            <End Role="invoice" EntitySet="invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__invoice__roomBoo__1AD3FDA4" Association="Self.FK__invoice__roomBoo__1AD3FDA4">
+            <End Role="roomBooking" EntitySet="roomBookings" />
+            <End Role="invoice" EntitySet="invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__invoice__tourBoo__1BC821DD" Association="Self.FK__invoice__tourBoo__1BC821DD">
+            <End Role="tourBooking" EntitySet="tourBookings" />
+            <End Role="invoice" EntitySet="invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__invoice__userId__19DFD96B" Association="Self.FK__invoice__userId__19DFD96B">
+            <End Role="userAccount" EntitySet="userAccounts" />
+            <End Role="invoice" EntitySet="invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__review__personId__151B244E" Association="Self.FK__review__personId__151B244E">
+            <End Role="userAccount" EntitySet="userAccounts" />
+            <End Role="review" EntitySet="reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__review__tourId__1332DBDC" Association="Self.FK__review__tourId__1332DBDC">
+            <End Role="tour" EntitySet="tours" />
+            <End Role="review" EntitySet="reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__review__userId__114A936A" Association="Self.FK__review__userId__114A936A">
+            <End Role="userAccount" EntitySet="userAccounts" />
+            <End Role="review" EntitySet="reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__room__personId__46E78A0C" Association="Self.FK__room__personId__46E78A0C">
+            <End Role="userAccount" EntitySet="userAccounts" />
+            <End Role="room" EntitySet="rooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__room_Serv__roomI__4F7CD00D" Association="Self.FK__room_Serv__roomI__4F7CD00D">
+            <End Role="room" EntitySet="rooms" />
+            <End Role="room_Service_Link" EntitySet="room_Service_Link" />
+          </AssociationSet>
+          <AssociationSet Name="FK__roomBooki__roomI__7B5B524B" Association="Self.FK__roomBooki__roomI__7B5B524B">
+            <End Role="room" EntitySet="rooms" />
+            <End Role="roomBooking" EntitySet="roomBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__room_Serv__perso__5165187F" Association="Self.FK__room_Serv__perso__5165187F">
+            <End Role="userAccount" EntitySet="userAccounts" />
+            <End Role="room_Service_Link" EntitySet="room_Service_Link" />
+          </AssociationSet>
+          <AssociationSet Name="FK__room_Serv__roomS__5070F446" Association="Self.FK__room_Serv__roomS__5070F446">
+            <End Role="roomService" EntitySet="roomServices" />
+            <End Role="room_Service_Link" EntitySet="room_Service_Link" />
+          </AssociationSet>
+          <AssociationSet Name="FK__roomBooki__perso__7D439ABD" Association="Self.FK__roomBooki__perso__7D439ABD">
+            <End Role="userAccount" EntitySet="userAccounts" />
+            <End Role="roomBooking" EntitySet="roomBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__roomBooki__userI__7C4F7684" Association="Self.FK__roomBooki__userI__7C4F7684">
+            <End Role="userAccount" EntitySet="userAccounts" />
+            <End Role="roomBooking" EntitySet="roomBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__roomServi__perso__4BAC3F29" Association="Self.FK__roomServi__perso__4BAC3F29">
+            <End Role="userAccount" EntitySet="userAccounts" />
+            <End Role="roomService" EntitySet="roomServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__serviceTy__perso__693CA210" Association="Self.FK__serviceTy__perso__693CA210">
+            <End Role="userAccount" EntitySet="userAccounts" />
+            <End Role="serviceType" EntitySet="serviceTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__statistic__perso__22751F6C" Association="Self.FK__statistic__perso__22751F6C">
+            <End Role="userAccount" EntitySet="userAccounts" />
+            <End Role="statistic" EntitySet="statistics" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tour__personId__5629CD9C" Association="Self.FK__tour__personId__5629CD9C">
+            <End Role="userAccount" EntitySet="userAccounts" />
+            <End Role="tour" EntitySet="tours" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tourBooki__tourI__02084FDA" Association="Self.FK__tourBooki__tourI__02084FDA">
+            <End Role="tour" EntitySet="tours" />
+            <End Role="tourBooking" EntitySet="tourBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tourSched__tourI__59FA5E80" Association="Self.FK__tourSched__tourI__59FA5E80">
+            <End Role="tour" EntitySet="tours" />
+            <End Role="tourSchedule" EntitySet="tourSchedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tourBooki__perso__03F0984C" Association="Self.FK__tourBooki__perso__03F0984C">
+            <End Role="userAccount" EntitySet="userAccounts" />
+            <End Role="tourBooking" EntitySet="tourBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tourBooki__userI__02FC7413" Association="Self.FK__tourBooki__userI__02FC7413">
+            <End Role="userAccount" EntitySet="userAccounts" />
+            <End Role="tourBooking" EntitySet="tourBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tourSched__perso__5AEE82B9" Association="Self.FK__tourSched__perso__5AEE82B9">
+            <End Role="userAccount" EntitySet="userAccounts" />
+            <End Role="tourSchedule" EntitySet="tourSchedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_userAccount_personId" Association="Self.FK_userAccount_personId">
+            <End Role="userAccount" EntitySet="userAccounts" />
+            <End Role="userAccount1" EntitySet="userAccounts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TravelKTSModelStoreContainer" CdmEntityContainer="TravelKTSEntities">
+          <EntitySetMapping Name="accommodations">
+            <EntityTypeMapping TypeName="TravelKTSModel.accommodation">
+              <MappingFragment StoreEntitySet="accommodation">
+                <ScalarProperty Name="accommodationId" ColumnName="accommodationId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="starRating" ColumnName="starRating" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="mainImage" ColumnName="mainImage" />
+                <ScalarProperty Name="pricePerNight" ColumnName="pricePerNight" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="dateEdited" ColumnName="dateEdited" />
+                <ScalarProperty Name="personId" ColumnName="personId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="entertainments">
+            <EntityTypeMapping TypeName="TravelKTSModel.entertainment">
+              <MappingFragment StoreEntitySet="entertainment">
+                <ScalarProperty Name="entertainmentId" ColumnName="entertainmentId" />
+                <ScalarProperty Name="entertainmentTypeId" ColumnName="entertainmentTypeId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="openTime" ColumnName="openTime" />
+                <ScalarProperty Name="closeTime" ColumnName="closeTime" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="dateEdited" ColumnName="dateEdited" />
+                <ScalarProperty Name="personId" ColumnName="personId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="entertainmentBookings">
+            <EntityTypeMapping TypeName="TravelKTSModel.entertainmentBooking">
+              <MappingFragment StoreEntitySet="entertainmentBooking">
+                <ScalarProperty Name="entertainmentBookingId" ColumnName="entertainmentBookingId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="entertainmentId" ColumnName="entertainmentId" />
+                <ScalarProperty Name="bookingDate" ColumnName="bookingDate" />
+                <ScalarProperty Name="departureDate" ColumnName="departureDate" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="dateEdited" ColumnName="dateEdited" />
+                <ScalarProperty Name="personId" ColumnName="personId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="entertainmentServices">
+            <EntityTypeMapping TypeName="TravelKTSModel.entertainmentService">
+              <MappingFragment StoreEntitySet="entertainmentService">
+                <ScalarProperty Name="entertainmentId" ColumnName="entertainmentId" />
+                <ScalarProperty Name="serviceId" ColumnName="serviceId" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="dateEdited" ColumnName="dateEdited" />
+                <ScalarProperty Name="personId" ColumnName="personId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="entertainmentTypes">
+            <EntityTypeMapping TypeName="TravelKTSModel.entertainmentType">
+              <MappingFragment StoreEntitySet="entertainmentType">
+                <ScalarProperty Name="entertainmentTypeId" ColumnName="entertainmentTypeId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="starRating" ColumnName="starRating" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="dateEdited" ColumnName="dateEdited" />
+                <ScalarProperty Name="personId" ColumnName="personId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="images">
+            <EntityTypeMapping TypeName="TravelKTSModel.image">
+              <MappingFragment StoreEntitySet="image">
+                <ScalarProperty Name="imageId" ColumnName="imageId" />
+                <ScalarProperty Name="accommodationId" ColumnName="accommodationId" />
+                <ScalarProperty Name="tourId" ColumnName="tourId" />
+                <ScalarProperty Name="entertainmentId" ColumnName="entertainmentId" />
+                <ScalarProperty Name="imagePath" ColumnName="imagePath" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="dateEdited" ColumnName="dateEdited" />
+                <ScalarProperty Name="personId" ColumnName="personId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="invoices">
+            <EntityTypeMapping TypeName="TravelKTSModel.invoice">
+              <MappingFragment StoreEntitySet="invoice">
+                <ScalarProperty Name="invoiceId" ColumnName="invoiceId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="roomBookingId" ColumnName="roomBookingId" />
+                <ScalarProperty Name="tourBookingId" ColumnName="tourBookingId" />
+                <ScalarProperty Name="entertainmentId" ColumnName="entertainmentId" />
+                <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="dateEdited" ColumnName="dateEdited" />
+                <ScalarProperty Name="personId" ColumnName="personId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reviews">
+            <EntityTypeMapping TypeName="TravelKTSModel.review">
+              <MappingFragment StoreEntitySet="review">
+                <ScalarProperty Name="reviewId" ColumnName="reviewId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="accommodationId" ColumnName="accommodationId" />
+                <ScalarProperty Name="tourId" ColumnName="tourId" />
+                <ScalarProperty Name="entertainmentId" ColumnName="entertainmentId" />
+                <ScalarProperty Name="rating" ColumnName="rating" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="reviewDate" ColumnName="reviewDate" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="dateEdited" ColumnName="dateEdited" />
+                <ScalarProperty Name="personId" ColumnName="personId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rooms">
+            <EntityTypeMapping TypeName="TravelKTSModel.room">
+              <MappingFragment StoreEntitySet="room">
+                <ScalarProperty Name="roomId" ColumnName="roomId" />
+                <ScalarProperty Name="accommodationId" ColumnName="accommodationId" />
+                <ScalarProperty Name="roomName" ColumnName="roomName" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="mainImage" ColumnName="mainImage" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="dateEdited" ColumnName="dateEdited" />
+                <ScalarProperty Name="personId" ColumnName="personId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="room_Service_Link">
+            <EntityTypeMapping TypeName="TravelKTSModel.room_Service_Link">
+              <MappingFragment StoreEntitySet="room_Service_Link">
+                <ScalarProperty Name="roomId" ColumnName="roomId" />
+                <ScalarProperty Name="roomServiceId" ColumnName="roomServiceId" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="dateEdited" ColumnName="dateEdited" />
+                <ScalarProperty Name="personId" ColumnName="personId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roomBookings">
+            <EntityTypeMapping TypeName="TravelKTSModel.roomBooking">
+              <MappingFragment StoreEntitySet="roomBooking">
+                <ScalarProperty Name="roombookingId" ColumnName="roombookingId" />
+                <ScalarProperty Name="accommodationId" ColumnName="accommodationId" />
+                <ScalarProperty Name="roomId" ColumnName="roomId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="bookingDate" ColumnName="bookingDate" />
+                <ScalarProperty Name="checkInDate" ColumnName="checkInDate" />
+                <ScalarProperty Name="checkOutDate" ColumnName="checkOutDate" />
+                <ScalarProperty Name="guestCount" ColumnName="guestCount" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="dateEdited" ColumnName="dateEdited" />
+                <ScalarProperty Name="personId" ColumnName="personId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roomServices">
+            <EntityTypeMapping TypeName="TravelKTSModel.roomService">
+              <MappingFragment StoreEntitySet="roomService">
+                <ScalarProperty Name="roomServiceId" ColumnName="roomServiceId" />
+                <ScalarProperty Name="serviceName" ColumnName="serviceName" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="extraCost" ColumnName="extraCost" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="dateEdited" ColumnName="dateEdited" />
+                <ScalarProperty Name="personId" ColumnName="personId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="serviceTypes">
+            <EntityTypeMapping TypeName="TravelKTSModel.serviceType">
+              <MappingFragment StoreEntitySet="serviceType">
+                <ScalarProperty Name="serviceId" ColumnName="serviceId" />
+                <ScalarProperty Name="serviceName" ColumnName="serviceName" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="dateEdited" ColumnName="dateEdited" />
+                <ScalarProperty Name="personId" ColumnName="personId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="statistics">
+            <EntityTypeMapping TypeName="TravelKTSModel.statistic">
+              <MappingFragment StoreEntitySet="statistic">
+                <ScalarProperty Name="statisticId" ColumnName="statisticId" />
+                <ScalarProperty Name="statisticType" ColumnName="statisticType" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="dateEdited" ColumnName="dateEdited" />
+                <ScalarProperty Name="personId" ColumnName="personId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tours">
+            <EntityTypeMapping TypeName="TravelKTSModel.tour">
+              <MappingFragment StoreEntitySet="tour">
+                <ScalarProperty Name="tourId" ColumnName="tourId" />
+                <ScalarProperty Name="tourName" ColumnName="tourName" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="departureLocation" ColumnName="departureLocation" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="dateEdited" ColumnName="dateEdited" />
+                <ScalarProperty Name="personId" ColumnName="personId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tourBookings">
+            <EntityTypeMapping TypeName="TravelKTSModel.tourBooking">
+              <MappingFragment StoreEntitySet="tourBooking">
+                <ScalarProperty Name="tourBookingId" ColumnName="tourBookingId" />
+                <ScalarProperty Name="tourId" ColumnName="tourId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="bookingDate" ColumnName="bookingDate" />
+                <ScalarProperty Name="departureDate" ColumnName="departureDate" />
+                <ScalarProperty Name="guestCount" ColumnName="guestCount" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="dateEdited" ColumnName="dateEdited" />
+                <ScalarProperty Name="personId" ColumnName="personId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tourSchedules">
+            <EntityTypeMapping TypeName="TravelKTSModel.tourSchedule">
+              <MappingFragment StoreEntitySet="tourSchedule">
+                <ScalarProperty Name="scheduleId" ColumnName="scheduleId" />
+                <ScalarProperty Name="tourId" ColumnName="tourId" />
+                <ScalarProperty Name="startDate" ColumnName="startDate" />
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="dateEdited" ColumnName="dateEdited" />
+                <ScalarProperty Name="personId" ColumnName="personId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userAccounts">
+            <EntityTypeMapping TypeName="TravelKTSModel.userAccount">
+              <MappingFragment StoreEntitySet="userAccount">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="dateEdited" ColumnName="dateEdited" />
+                <ScalarProperty Name="personId" ColumnName="personId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
